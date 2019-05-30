@@ -4,12 +4,6 @@ import './App.css';
 import RoomList from './components/RoomList';
 import * as firebase from 'firebase';
 
-  // The core Firebase JS SDK is always required and must be listed first
-  // src="https://www.gstatic.com/firebasejs/6.0.4/firebase-app.js"
-
-  // TODO: Add SDKs for Firebase products that you want to use
-  //    https://firebase.google.com/docs/web/setup#config-web-app
-
 // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyAX3wffT4ds3bu59gk8ApQR4bxN-nMcpOQ",
@@ -43,9 +37,6 @@ function App() {
           Learn React
         </a>
       </header>
-      <main>
-        {this.props.RoomList}
-      </main>
     </div>
   );
 }
