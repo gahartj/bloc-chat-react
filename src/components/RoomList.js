@@ -24,7 +24,8 @@ class RoomList extends Component {
       e.preventDefault();
       this.roomsRef.push({
       name: this.state.newRoom
-    });
+      });
+      this.setState({ newRoom: "" });
   }
 
   render() {
