@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import RoomList from './components/RoomList';
+import MessageList from './components/MessageList';
 import * as firebase from 'firebase';
 
 // Your web app's Firebase configuration
@@ -24,7 +25,8 @@ function App() {
           #FearTheDeer
         </p>
         <aside id="sidebar">
-          <RoomList firebase={firebase}/>
+          <RoomList firebase={firebase} />
+          <MessageList firebase={firebase} />
         </aside>
       </header>
     </div>
