@@ -7,7 +7,7 @@ class MessageList extends Component {
     this.messagesRef = this.props.firebase.database().ref('Messages');
 
     this.state = {
-      messages: [],
+      messages: []
     };
   }
 
@@ -19,6 +19,12 @@ class MessageList extends Component {
          this.setState({ messages: this.state.messages.concat( message ) })
        });
      }
+
+    // getMessages() {
+    //   var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
+    //   console.log(snapshot.key("It's working!"));
+    //   })
+    // }
 
   // getMessages(messages) {
   //   let activeMessages = messages.map((message) => {
@@ -33,16 +39,11 @@ class MessageList extends Component {
   //   }
   // }
 
-  // <div>
+  // <div className="message-data" >
   //   {Object.values(this.state.messages).map((message, i) =>
-  //     <div key={i}>
-  //       <div>{message.username}</div>
-  //       <div>{message.content}</div>
-  //       <div>{message.sentAt}</div>
-  //     </div>
+  //     <div key={i}>{message.username}{message.content}{message.sentAt}</div>
   //   )}
   // </div>
-
 
   render() {
     return (
@@ -50,10 +51,8 @@ class MessageList extends Component {
         <div>
           {this.props.activeRoom.name}
         </div>
-        <div className="message-data" >
-          {Object.values(this.props.activeRoom).map((message, i) =>
-            <div key={i} onSelect={() => this.props.currentMessages(message)}>{message.username}{message.content}{message.sentAt}</div>
-          )}
+        <div className="message-data">
+          {this.props.getMessages()}
         </div>
       </div>
     );
