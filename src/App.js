@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
@@ -17,20 +17,40 @@ import * as firebase from 'firebase';
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          #FearTheDeer
-        </p>
-        <aside id="sidebar">
-          <RoomList firebase={firebase} />
-          <MessageList firebase={firebase} />
-        </aside>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state= {
+      activeRoom: [],
+      currentMessages: []
+    };
+  }
+
+  selectedRoom(room) {
+    console.log(room);
+    this.setState({ activeRoom: room });
+  }
+
+  currentMessages(message) {
+    console.log(message);
+    this.setState({ currentMessages: message});
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <aside id="sidebar">
+            <RoomList firebase={firebase} selectedRoom={(room) => this.selectedRoom(room)} />
+          </aside>
+          <div id="message-list">
+           <MessageList firebase={firebase} activeRoom={this.state.activeRoom} currentMessages={(message) => this.currentMessages(message)} />
+          </div>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;

@@ -31,9 +31,9 @@ class RoomList extends Component {
   render() {
     return (
         <form>
-          <div className="room-data">
+          <div className="room-data" >
             {Object.values(this.state.rooms).map((room, i) =>
-              <div key={i}>{room.name}</div>
+              <div key={i} onClick={() => this.props.selectedRoom(room)}>{room.name}</div>
             )}
           </div>
           <br />
