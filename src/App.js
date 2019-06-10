@@ -32,11 +32,17 @@ class App extends Component {
     this.setState({ activeRoom: room });
   }
 
-  getMessages() {
-    var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
-    console.log(snapshot.key("It's working!"));
-    })
-  }
+  // getMessages() {
+  //   var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
+  //   console.log(snapshot.key("It's working!"));
+  //   })
+  // }
+
+  // getMessages = () => {
+  //     var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
+  //     console.log(snapshot.key("It's working!"));
+  //     })
+  //   }
 
   // currentMessages(message) {
   //   console.log(message);
@@ -50,7 +56,7 @@ class App extends Component {
           <aside id="sidebar">
             <RoomList firebase={firebase} selectedRoom={(room) => this.selectedRoom(room)} />
           </aside>
-          <div id="message-list" getMessages={() => this.getMessages()}>
+          <div id="message-list" >
            <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
           </div>
         </header>

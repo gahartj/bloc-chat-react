@@ -20,24 +20,20 @@ class MessageList extends Component {
        });
      }
 
-    // getMessages() {
-    //   var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
-    //   console.log(snapshot.key("It's working!"));
-    //   })
-    // }
+     // getMessages = () => {
+     //     var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
+     //     console.log(snapshot.key("It's working!"));
+     //     })
+     //   }
 
-  // getMessages(messages) {
-  //   let activeMessages = messages.map((message) => {
-  //     if (message.roomId === this.props.activeRoom.key) {
-  //       return message;
-  //     }
-  //   });
-  //   if (activeMessages === null) {
-  //     return [];
-  //   } else {
-  //     return activeMessages;
-  //   }
-  // }
+  getMessages(messages) {
+    let activeMessages = messages.filter((message) =>
+      message.roomId === this.props.activeRoom.key
+    );
+      console.log(activeMessages);
+      console.log(messages);
+      return activeMessages;
+  }
 
   // <div className="message-data" >
   //   {Object.values(this.state.messages).map((message, i) =>
@@ -45,14 +41,24 @@ class MessageList extends Component {
   //   )}
   // </div>
 
+  // getMessages() {
+  //     if (this.props.activeRoom === "" || undefined || null) {
+  //       return "";
+  //     } else {
+  //         console.log("It's working!");
+  //     }
+  //   }
+
   render() {
     return (
       <div>
         <div>
-          {this.props.activeRoom.name}
+          <h2>{this.props.activeRoom.name}</h2>
         </div>
         <div className="message-data">
-          {this.props.getMessages()}
+          {this.props.activeRoom.length === 0 ? "" : Object.values(this.getMessages(this.state.messages)).map((message, i) =>
+            <div key={i}>{message.username}<br />{message.content}<br />{message.sentAt}<br /><br /></div>
+          )}
         </div>
       </div>
     );
