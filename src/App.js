@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
+import User from './components/User';
 import * as firebase from 'firebase';
 
 // Your web app's Firebase configuration
@@ -22,8 +23,8 @@ class App extends Component {
     super(props);
 
     this.state= {
-      activeRoom: []
-      // currentMessages: []
+      activeRoom: [],
+      user: []
     };
   }
 
@@ -32,22 +33,10 @@ class App extends Component {
     this.setState({ activeRoom: room });
   }
 
-  // getMessages() {
-  //   var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
-  //   console.log(snapshot.key("It's working!"));
-  //   })
-  // }
-
-  // getMessages = () => {
-  //     var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
-  //     console.log(snapshot.key("It's working!"));
-  //     })
-  //   }
-
-  // currentMessages(message) {
-  //   console.log(message);
-  //   this.setState({ currentMessages: message});
-  // }
+  setUser() {
+    console.log("Just a little rock, paper, scissors joke for you.");
+    this.setState({ user: "" });
+  }
 
   render() {
     return (
@@ -56,6 +45,9 @@ class App extends Component {
           <aside id="sidebar">
             <RoomList firebase={firebase} selectedRoom={(room) => this.selectedRoom(room)} />
           </aside>
+          <div id="sign-in">
+            <User firebase={firebase} setUser={() => this.setUser()} user={this.state.user}/>
+          </div>
           <div id="message-list" >
            <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
           </div>

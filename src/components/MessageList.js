@@ -20,12 +20,6 @@ class MessageList extends Component {
        });
      }
 
-     // getMessages = () => {
-     //     var ref = this.state.messages; ref.orderByChild("roomId").equalTo(this.props.activeRoom.key).on("child_added", function(snapshot) {
-     //     console.log(snapshot.key("It's working!"));
-     //     })
-     //   }
-
   getMessages(messages) {
     let activeMessages = messages.filter((message) =>
       message.roomId === this.props.activeRoom.key
@@ -34,20 +28,6 @@ class MessageList extends Component {
       console.log(messages);
       return activeMessages;
   }
-
-  // <div className="message-data" >
-  //   {Object.values(this.state.messages).map((message, i) =>
-  //     <div key={i}>{message.username}{message.content}{message.sentAt}</div>
-  //   )}
-  // </div>
-
-  // getMessages() {
-  //     if (this.props.activeRoom === "" || undefined || null) {
-  //       return "";
-  //     } else {
-  //         console.log("It's working!");
-  //     }
-  //   }
 
   render() {
     return (

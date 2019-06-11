@@ -58,6 +58,11 @@
   }
 
 #active-room {
-      margin-left: 160px;
-      padding: 0px 10px;
-    }
+    margin-left: 160px;
+    padding: 0px 10px;
+  }
+
+#sign-in-out {
+    margin-left: 160px;
+    padding: 0px 10px;
+  }
