@@ -30,11 +30,16 @@ class MessageList extends Component {
 
   createMessage(e) {
       e.preventDefault();
+      const { user } = this.props;
+      let displayName = "Guest";
+      if (user !== null) {
+        displayName = user.displayName === "" ? displayName : user.displayName;
+      };
       this.messagesRef.push({
       content: this.state.newMessage,
       roomId: this.props.activeRoom.key,
       sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
-      username: this.props.user.displayName
+      username: displayName
       });
       this.setState({ newMessage: "" });
   }
