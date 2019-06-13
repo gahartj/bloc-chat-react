@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
    componentDidMount() {
      this.props.firebase.auth().onAuthStateChanged( user => {
-       this.props.setUser();
+       this.props.setUser(user);
      });
    }
 
@@ -13,18 +13,22 @@ import React, { Component } from 'react';
      this.props.firebase.auth().signInWithPopup( provider );
    }
 
-   signOut() {
+   signOut(user) {
+     console.log(user)
      this.props.firebase.auth().signOut();
    }
 
    render() {
+     const { user } = this.props;
+     let displayName = "Guest";
+     if (user !== null) {
+       displayName = user.displayName === "" ? displayName : user.displayName;
+     }
      return (
        <div id="sign-in-out">
         <button onClick={() => this.signInWithPopup()}>Sign in here please. Or don't. That's fine too.</button><br />
         <button onClick={() => this.signOut()}>Sign out here. Or don't. You be you.</button>
-        <div>
-        {this.props.user.displayName === "" ? "Guest" : this.props.user.displayName}
-        </div>
+        <div>{displayName}</div>
       </div>
     );
   }
