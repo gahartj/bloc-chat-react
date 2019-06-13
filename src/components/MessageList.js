@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'moment';
 
 class MessageList extends Component {
   constructor(props) {
@@ -38,6 +39,11 @@ class MessageList extends Component {
       this.setState({ newMessage: "" });
   }
 
+  formatTimeStamp(time) {
+      const m = Moment(time);
+      return m.format("M/D/YY, h:mm:ss a");
+  }
+
   render() {
     return (
       <div>
@@ -49,7 +55,7 @@ class MessageList extends Component {
             <div key={i}>
               {message.username}<br />
               {message.content}<br />
-              {message.sentAt}<br /><br />
+              {this.formatTimeStamp(message.sentAt)}<br /><br />
             </div>
           )}
         </div>
