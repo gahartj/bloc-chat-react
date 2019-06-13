@@ -7,12 +7,12 @@ class MessageList extends Component {
     this.messagesRef = this.props.firebase.database().ref('Messages');
 
     this.state = {
-      messages: []
+      messages: [],
+      newMessage: []
     };
   }
 
   componentDidMount() {
-    console.log()
        this.messagesRef.on('child_added', snapshot => {
          const message = snapshot.val();
          message.key = snapshot.key;
@@ -24,9 +24,18 @@ class MessageList extends Component {
     let activeMessages = messages.filter((message) =>
       message.roomId === this.props.activeRoom.key
     );
-      console.log(activeMessages);
-      console.log(messages);
       return activeMessages;
+  }
+
+  createMessage(e) {
+      e.preventDefault();
+      this.messagesRef.push({
+      content: this.state.newMessage,
+      roomId: this.props.activeRoom.key,
+      sentAt: this.props.firebase.database.ServerValue.TIMESTAMP,
+      username: this.props.user.displayName
+      });
+      this.setState({ newMessage: "" });
   }
 
   render() {
@@ -37,9 +46,33 @@ class MessageList extends Component {
         </div>
         <div className="message-data">
           {this.props.activeRoom.length === 0 ? "" : Object.values(this.getMessages(this.state.messages)).map((message, i) =>
-            <div key={i}>{message.username}<br />{message.content}<br />{message.sentAt}<br /><br /></div>
+            <div key={i}>
+              {message.username}<br />
+              {message.content}<br />
+              {message.sentAt}<br /><br />
+            </div>
           )}
         </div>
+        {this.props.activeRoom.length === 0 ? "" :
+        <form>
+          <label>
+            New Message: <br />
+            <input
+              type="text"
+              name="create-message"
+              value={this.state.newMessage}
+              onChange={e => this.setState({ newMessage: e.target.value })}
+              placeholder="write something cool"
+              /><br />
+          </label>
+            <input
+              type="submit"
+              name="send"
+              value="Send"
+              onClick={e => this.createMessage(e)}
+              /><br />
+        </form>
+      }
       </div>
     );
   }

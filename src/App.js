@@ -29,12 +29,10 @@ class App extends Component {
   }
 
   selectedRoom(room) {
-    console.log(room);
     this.setState({ activeRoom: room });
   }
 
   setUser() {
-    console.log("Just a little rock, paper, scissors joke for you.");
     this.setState({ user: "" });
   }
 
@@ -49,7 +47,7 @@ class App extends Component {
             <User firebase={firebase} setUser={() => this.setUser()} user={this.state.user}/>
           </div>
           <div id="message-list" >
-           <MessageList firebase={firebase} activeRoom={this.state.activeRoom} />
+           <MessageList firebase={firebase} activeRoom={this.state.activeRoom} user={this.state.user} />
           </div>
         </header>
       </div>
